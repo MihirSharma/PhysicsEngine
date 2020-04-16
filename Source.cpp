@@ -1,15 +1,46 @@
 #include<iostream>
 #include "VectorOps.h"
+#include "GameObject.h"
+#include<chrono>
+#include "Physics.h"
+#include<conio.h>
+#define clrscr std::cout << "\033[2J\033[1;1H"
+
 
 int main() {
-	Vector2 a(1,0), b(1,8),c ;
-	c = a * static_cast<float>(10);
+
+	auto start = std::chrono::steady_clock::now();
 	
+	GameObject2D obj1, obj2(Vector2(1.0, 2.0), 20.6, 2.1), obj3;
+	//GameObject3D obja, objb(Vector3(1.0, 2.3, -5.5), 1.0, 2.2, "Player1-3D"), objc;
+	//obja.SetTag("Player1-3D");
+	//objc.SetTag("Player2-3D");
+	//objc.SetPos(Vector3(1.2, 2.0, -5.6));
+	obj1.SetTag("Player1");
+	//obj2.SetTag("Player2");
+	//obj3.SetPos(Vector2(2.0, -5.6));
+	//std::cout << obja.GetPos() << std::endl << objb.GetPos() << std::endl << std::endl;
+	//std::cout << obja << std::endl << objb << std::endl << objc << std::endl << std::endl;
+	//std::cout << obj1 << std::endl << obj2 << std::endl << obj3 << std::endl;
+	//std::cout << std::endl << std::chrono::duration_cast<std::chrono::seconds> (std::chrono::steady_clock::now() - start).count() << std::endl;
 
-	Vector3 e(1.0, 20.5, 5), d(2.8, 5, 6);
-	Vector3 f = Vector3::normalize(d);
-
-	Vector4 x(1, 2, 3, 4), y(5, 2, 7, -2), z(-1,-6,4,7);
-	Vector4 r = Vector4::cross(x, y, z); 
-	std::cout << Vector2::normalize(b) * (float)10 << std::endl << f << std::endl << r;
+	//std::cout << std::endl << "--------------------------------------------------------------------------------------------------------------------------------" << std::endl << std::endl;
+	long long int frate = 60, pauseNew, pause;
+	char ch;
+	while (true)
+	{
+		
+		pauseNew = (std::chrono::steady_clock::now() - start).count();
+		Physics::SetVelocity2D(obj1, Vector2(1, 1));
+		//std::cout << frate << std::endl;
+		if (std::chrono::duration_cast<std::chrono::milliseconds> (std::chrono::steady_clock::now() - start).count() % 1000 == 0) {
+			clrscr;
+			std::cout << obj1.GetPos();
+		}
+		pause = (std::chrono::steady_clock::now() - start).count();
+		frate = (pauseNew - pause);
+		
+	}
+	
 }
+
