@@ -6,14 +6,14 @@
 		
 		Vector2::Vector2()
 			:x(0), y(0) {}
-		Vector2::Vector2(float x, float y)
+		Vector2::Vector2(long float x, long float y)
 			: x(x), y(y) {}
 
-		Vector2 Vector2::operator+(Vector2& other) {
+		Vector2 Vector2::operator+(Vector2 other) {
 			return Vector2(x + other.x, y + other.y);
 		}
 
-		Vector2 Vector2::operator-(Vector2& other) {
+		Vector2 Vector2::operator-(Vector2 other) {
 			return Vector2(x - other.x, y - other.y);
 		}
 		Vector2 Vector2::operator*(float f) {
@@ -35,7 +35,7 @@
 		}
 
 	std::ostream& operator <<(std::ostream& out, Vector2 other) {
-		out << "(" << other.x << "," << other.y << ")";
+		out << "(" << (int)other.x << "," << (int)other.y << ")";
 		return out;
 	}
 
