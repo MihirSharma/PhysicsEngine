@@ -25,6 +25,9 @@ int main() {
 	//std::cout << obj1 << std::endl << obj2 << std::endl << obj3 << std::endl;
 	//std::cout << std::endl << std::chrono::duration_cast<std::chrono::seconds> (std::chrono::steady_clock::now() - start).count() << std::endl;
 
+	objc.SetName( "Player1-3D");
+	objc.SetTag("Player1-3D");
+
 	//std::cout << std::endl << "--------------------------------------------------------------------------------------------------------------------------------" << std::endl << std::endl;
 	long long int frate = 60, pauseNew, pause;
 	char ch;
@@ -44,9 +47,9 @@ int main() {
 		
 	}*/
 
-	GameObject3D::ListIt();
+	//GameObject3D::ListIt();
 	std::cout << std::endl;
-	//GameObject3D::SearchAndList("obj b");
+	GameObject3D::SearchAndList("Player1-3D");
 	
 	
 }
