@@ -1,22 +1,39 @@
 #include "GameObject2D.h"
 
-GameObject2D::GameObject2D(Vector2 position, float Mass, float Drag, std::string Tag)
-	:Pos(position), Mass(Mass), Drag(Drag) , Tag(Tag){}
+std::vector<GameObject2D*> GameObject2D::ObjectList;
 
-GameObject2D::GameObject2D(Vector2 position, float Mass, float Drag)
-	:Pos(position), Mass(Mass), Drag(Drag), Tag("Unassigned") {}
+GameObject2D::GameObject2D(std::string name, Vector2 position, float Mass, float Drag, std::string Tag)
+	: Name(name), Pos(position), Mass(Mass), Drag(Drag) , Tag(Tag){
+	GameObject2D::ObjectList.push_back(this);
+}
+
+GameObject2D::GameObject2D(std::string name, Vector2 position, float Mass, float Drag)
+	: Name(name), Pos(position), Mass(Mass), Drag(Drag), Tag("Unassigned") {
+	GameObject2D::ObjectList.push_back(this);
+}
 
 
-GameObject2D::GameObject2D(Vector2 position, float Mass)
-	: Pos(position), Mass(Mass), Drag(0.0), Tag("Unassigned") {}
+GameObject2D::GameObject2D(std::string name, Vector2 position, float Mass)
+	: Name(name), Pos(position), Mass(Mass), Drag(0.0), Tag("Unassigned") {
+	GameObject2D::ObjectList.push_back(this);
+}
 
 
-GameObject2D::GameObject2D(Vector2 position)
-	: Pos(position), Mass(1.0), Drag(0.0), Tag("Unassigned") {}
+GameObject2D::GameObject2D(std::string name, Vector2 position)
+	: Name(name), Pos(position), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	GameObject2D::ObjectList.push_back(this);
+}
 
+
+GameObject2D::GameObject2D(std::string name)
+	: Name(name), Pos(), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	GameObject2D::ObjectList.push_back(this);
+}
 
 GameObject2D::GameObject2D()
-	: Pos(), Mass(1.0), Drag(0.0), Tag("Unassigned") {}
+	: Name("Unnamed GameObject"), Pos(), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	GameObject2D::ObjectList.push_back(this);
+}
 
 void GameObject2D::SetPos(Vector2 pos) {
 	Pos = pos;
@@ -47,7 +64,29 @@ std::string GameObject2D::GetTag() {
 	return Tag;
 }
 
+void GameObject2D::SetName(std::string Name) {
+	GameObject2D::Name = Name;
+}
+
+std::string GameObject2D::GetName() {
+	return Name;
+}
+
 std::ostream& operator <<(std::ostream& out, GameObject2D& go) {
-	out << "Position : " << go.Pos << std::endl << "Mass : " << go.Mass << std::endl << "Drag :" << go.Drag << std::endl << "Tag : " << go.Tag << std::endl;
+	out << "Name : " << go.Name << std::endl << "Position : " << go.Pos << std::endl << "Mass : " << go.Mass << std::endl << "Drag :" << go.Drag << std::endl << "Tag : " << go.Tag << std::endl;
 	return out;
+}
+
+
+void GameObject2D::ListIt() {
+	for (auto it : GameObject2D::ObjectList) {
+		std::cout << *it << std::endl << std::endl;
+	}
+}
+
+void GameObject2D::SearchAndList(std::string tag) {
+	for (auto it : GameObject2D::ObjectList) {
+		if(it->Tag == tag)
+			std::cout << *it << std::endl << std::endl;
+	}
 }

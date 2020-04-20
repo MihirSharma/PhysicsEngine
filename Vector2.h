@@ -9,6 +9,8 @@
 		Vector2();
 		Vector2(long float a, long float b);
 		friend std::ostream& operator<<(std::ostream& out, Vector2 other);
+		float magnitude();
+		void operator=(Vector2 other);
 		Vector2 operator+(Vector2 other);
 		Vector2 operator-(Vector2 other);
 		Vector2 operator*(float f);

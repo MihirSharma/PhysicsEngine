@@ -9,6 +9,15 @@
 		Vector2::Vector2(long float x, long float y)
 			: x(x), y(y) {}
 
+		float Vector2::magnitude() {
+			return sqrt(x * x + y * y);
+		}
+
+		void Vector2::operator=(Vector2 other) {
+			x = other.x;
+			y = other.y;
+		}
+
 		Vector2 Vector2::operator+(Vector2 other) {
 			return Vector2(x + other.x, y + other.y);
 		}

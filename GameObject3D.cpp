@@ -1,22 +1,42 @@
 #include "GameObject3D.h"
 
-GameObject3D::GameObject3D(Vector3 position, float Mass, float Drag, std::string Tag)
-	:Pos(position), Mass(Mass), Drag(Drag), Tag(Tag) {}
+std::vector<GameObject3D*> GameObject3D::ObjectList;
 
-GameObject3D::GameObject3D(Vector3 position, float Mass, float Drag)
-	: Pos(position), Mass(Mass), Drag(Drag), Tag("Unassigned") {}
+Vector3 x;
 
 
-GameObject3D::GameObject3D(Vector3 position, float Mass)
-	: Pos(position), Mass(Mass), Drag(0.0), Tag("Unassigned") {}
+GameObject3D::GameObject3D(std::string name = "Unnamed GameObject", Vector3 position = x, float Mass = 1.0, float Drag = 0.0, std::string Tag = "Unassigned")
+	: Name(name), Pos(position), Mass(Mass), Drag(Drag), Tag(Tag) {
+	GameObject3D::ObjectList.push_back(this);
+}
+
+GameObject3D::GameObject3D(std::string name, Vector3 position, float Mass, float Drag)
+	: Name(name), Pos(position), Mass(Mass), Drag(Drag), Tag("Unassigned") {
+	GameObject3D::ObjectList.push_back(this);
+}
 
 
-GameObject3D::GameObject3D(Vector3 position)
-	: Pos(position), Mass(1.0), Drag(0.0), Tag("Unassigned") {}
+GameObject3D::GameObject3D(std::string name, Vector3 position, float Mass)
+	: Name(name), Pos(position), Mass(Mass), Drag(0.0), Tag("Unassigned") {
+	GameObject3D::ObjectList.push_back(this);
+}
 
+
+GameObject3D::GameObject3D(std::string name, Vector3 position)
+	: Name(name), Pos(position), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	GameObject3D::ObjectList.push_back(this);
+}
+
+
+GameObject3D::GameObject3D(std::string name)
+	: Name(name), Pos(), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	GameObject3D::ObjectList.push_back(this);
+}
 
 GameObject3D::GameObject3D()
-	: Pos(), Mass(1.0), Drag(0.0), Tag("Unassigned") {}
+	: Name("Unnamed GameObject"), Pos(), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	GameObject3D::ObjectList.push_back(this);
+}
 
 void GameObject3D::SetPos(Vector3 pos) {
 	Pos = pos;
@@ -47,7 +67,28 @@ std::string GameObject3D::GetTag() {
 	return Tag;
 }
 
+void GameObject3D::SetName(std::string Name) {
+	GameObject3D::Name = Name;
+}
+
+std::string GameObject3D::GetName() {
+	return Name;
+}
+
 std::ostream& operator <<(std::ostream& out, GameObject3D& go) {
-	out << "Position : " << go.Pos << std::endl << "Mass : " << go.Mass << std::endl << "Drag :" << go.Drag << std::endl << "Tag : " << go.Tag << std::endl;
+	out << "Name : " << go.Name << std::endl << "Position : " << go.Pos << std::endl << "Mass : " << go.Mass << std::endl << "Drag :" << go.Drag << std::endl << "Tag : " << go.Tag << std::endl;
 	return out;
+}
+
+void GameObject3D::ListIt() {
+	for (auto it : GameObject3D::ObjectList) {
+		std::cout << *it << std::endl << std::endl;
+	}
+}
+
+void GameObject3D::SearchAndList(std::string tag) {
+	for (auto it : GameObject3D::ObjectList) {
+		if (it->Tag == tag || it->Name == tag)
+			std::cout << *it << std::endl << std::endl;
+	}
 }
