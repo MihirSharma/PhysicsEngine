@@ -86,7 +86,11 @@ void GameObject2D::ListIt() {
 
 void GameObject2D::SearchAndList(std::string tag) {
 	for (auto it : GameObject2D::ObjectList) {
-		if(it->Tag == tag)
-			std::cout << *it << std::endl << std::endl;
+		if (it->Tag == tag || it->Name == tag) {
+			if (it->Name == tag)
+				std::cout << "Found Object with Matching Name" << std::endl << std::endl << *it << std::endl << std::endl;
+			else if (it->Tag == tag)
+				std::cout << "Found Object with Matching Tag" << std::endl << std::endl << *it << std::endl << std::endl;
+		}
 	}
 }
