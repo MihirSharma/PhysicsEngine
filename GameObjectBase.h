@@ -1,4 +1,8 @@
 #pragma once
+
+#include<vector>
+#include<string>
+
 class GameObjectBase
 {
 private:
@@ -11,5 +15,8 @@ public:
 
 	float GetRad();
 	void SetRad(float rad);
+	std::vector<std::string> collisionException;
+	void AddToCollisionException(std::string x);
 };
+
 

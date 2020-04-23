@@ -114,7 +114,12 @@ void GameObject2D::SearchAndList(std::string tag) {
 GameObject2D* GameObject2D::CollisionDetection2D() {
 	bool colliding = false;
 	for (auto it : GameObject2D::ObjectList) {
-		if (!((abs(it->Pos.x + it->radius) - abs(Pos.x - radius) <= 0 || abs(Pos.x + radius) - abs(it->Pos.x - it->radius) <= 0)) && !((abs(it->Pos.y + it->radius) - abs(Pos.y - radius) <= 0 || abs(Pos.y + radius) - abs(it->Pos.y - it->radius) <= 0)) && uid != it->uid) {
+		bool exception = false;
+		for (auto it2 : it->collisionException) {
+			if(it2 == it->Tag)
+				exception = true;
+		}
+		if (!((abs(it->Pos.x + it->radius) - abs(Pos.x - radius) <= 0 || abs(Pos.x + radius) - abs(it->Pos.x - it->radius) <= 0)) && !((abs(it->Pos.y + it->radius) - abs(Pos.y - radius) <= 0 || abs(Pos.y + radius) - abs(it->Pos.y - it->radius) <= 0)) && (uid != it->uid && !exception)) {
 			colliding = true;
 			return it;
 		}

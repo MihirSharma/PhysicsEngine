@@ -7,3 +7,7 @@ float GameObjectBase::GetRad() {
 void GameObjectBase::SetRad(float rad) {
 	radius = rad;
 }
+
+void GameObjectBase::AddToCollisionException(std::string x) {
+	collisionException.push_back(x);
+}

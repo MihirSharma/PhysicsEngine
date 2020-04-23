@@ -13,7 +13,7 @@ int main() {
 	auto start = std::chrono::steady_clock::now();
 	
 	GameObject2D obj1("obj1"), obj2("obj2", Vector2(1.0, 2.0), 20.6, 2.1);
-	GameObject3D obja, objb("obj b", Vector3(1.0, 2.3, -5.5), 1.0, 2.2, "Player1-3D");
+	GameObject3D obja, objb("obj b", Vector3(1.0, 2.3, -5.5), 1.0, 2.2, "Player1-3D"), objc("obj c", Vector3(43,22,22));
 	//obja.SetTag("Player1-3D");
 	//objc.SetTag("Player2-3D");
 	//objc.SetPos(Vector3(1.2, 2.0, -5.6));
@@ -23,6 +23,7 @@ int main() {
 	//obj3.SetPos(Vector2(2.0, -5.6));
 	obja.SetRad(10);
 	objb.SetRad(5);
+	objc.SetRad(10);
 	objb.SetPos(Vector3(20,20,20));
 	//std::cout << obja.GetPos() << std::endl << objb.GetPos() << std::endl << std::endl;
 	//std::cout << obja << std::endl << objb << std::endl << objc << std::endl << std::endl;
@@ -36,6 +37,7 @@ int main() {
 	long long int frate = 60, pauseNew, pause;
 	char ch;
 	Vector3 f(2, 1, 1);
+	obja.AddToCollisionException("Player1-3D");
 	while (true)
 	{
 		
