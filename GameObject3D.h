@@ -2,8 +2,9 @@
 
 #include "VectorOps.h"
 #include <vector>
+#include "GameObjectBase.h"
 
-class GameObject3D
+class GameObject3D: public GameObjectBase
 {
 private:
 	static std::vector<GameObject3D*> ObjectList;
@@ -12,6 +13,8 @@ private:
 	float Mass;
 	float Drag;
 	std::string Tag;
+	int uid;
+	static int ctr;
 
 public:
 	static void ListIt();
@@ -32,6 +35,8 @@ public:
 	std::string GetTag();
 	void SetName(std::string Name);
 	std::string GetName();
+	GameObject3D* CollisionDetection3D();
+	void operator= (GameObject3D x);
 
 	friend std::ostream& operator << (std::ostream& out, GameObject3D& go);
 	friend class Physics;

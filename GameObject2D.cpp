@@ -1,38 +1,46 @@
 #include "GameObject2D.h"
+#include<cmath>
 
 std::vector<GameObject2D*> GameObject2D::ObjectList;
+int GameObject2D::ctr = 1;
 
 GameObject2D::GameObject2D(std::string name, Vector2 position, float Mass, float Drag, std::string Tag)
-	: Name(name), Pos(position), Mass(Mass), Drag(Drag) , Tag(Tag){
+	: Name(name), Pos(position), Mass(Mass), Drag(Drag) , Tag(Tag), uid(ctr){
 	GameObject2D::ObjectList.push_back(this);
+	ctr++;
 }
 
 GameObject2D::GameObject2D(std::string name, Vector2 position, float Mass, float Drag)
-	: Name(name), Pos(position), Mass(Mass), Drag(Drag), Tag("Unassigned") {
+	: Name(name), Pos(position), Mass(Mass), Drag(Drag), Tag("Unassigned"), uid(ctr) {
 	GameObject2D::ObjectList.push_back(this);
+	ctr++;
 }
 
 
 GameObject2D::GameObject2D(std::string name, Vector2 position, float Mass)
-	: Name(name), Pos(position), Mass(Mass), Drag(0.0), Tag("Unassigned") {
+	: Name(name), Pos(position), Mass(Mass), Drag(0.0), Tag("Unassigned"), uid(ctr) {
 	GameObject2D::ObjectList.push_back(this);
+	ctr++;
 }
 
 
 GameObject2D::GameObject2D(std::string name, Vector2 position)
-	: Name(name), Pos(position), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	: Name(name), Pos(position), Mass(1.0), Drag(0.0), Tag("Unassigned"), uid(ctr) {
 	GameObject2D::ObjectList.push_back(this);
+	ctr++;
 }
 
 
 GameObject2D::GameObject2D(std::string name)
-	: Name(name), Pos(), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	: Name(name), Pos(Vector2(0,0)), Mass(1.0), Drag(0.0), Tag("Unassigned"), uid(ctr) {
 	GameObject2D::ObjectList.push_back(this);
+	ctr++;
 }
 
 GameObject2D::GameObject2D()
-	: Name("Unnamed GameObject"), Pos(), Mass(1.0), Drag(0.0), Tag("Unassigned") {
+	: Name("Unnamed GameObject"), Pos(Vector2(0,0)), Mass(1.0), Drag(0.0), Tag("Unassigned"), uid(ctr) {
 	GameObject2D::ObjectList.push_back(this);
+	ctr++;
 }
 
 void GameObject2D::SetPos(Vector2 pos) {
@@ -77,6 +85,14 @@ std::ostream& operator <<(std::ostream& out, GameObject2D& go) {
 	return out;
 }
 
+void GameObject2D::operator=(GameObject2D x) {
+	radius = x.radius;
+	Name = x.Name;
+	Pos = x.Pos;
+	Mass = x.Mass;
+	Drag = x.Drag;
+	Tag = x.Tag;
+}
 
 void GameObject2D::ListIt() {
 	for (auto it : GameObject2D::ObjectList) {
@@ -93,4 +109,16 @@ void GameObject2D::SearchAndList(std::string tag) {
 				std::cout << "Found Object with Matching Tag" << std::endl << std::endl << *it << std::endl << std::endl;
 		}
 	}
+}
+
+GameObject2D* GameObject2D::CollisionDetection2D() {
+	bool colliding = false;
+	for (auto it : GameObject2D::ObjectList) {
+		if (!((abs(it->Pos.x + it->radius) - abs(Pos.x - radius) <= 0 || abs(Pos.x + radius) - abs(it->Pos.x - it->radius) <= 0)) && !((abs(it->Pos.y + it->radius) - abs(Pos.y - radius) <= 0 || abs(Pos.y + radius) - abs(it->Pos.y - it->radius) <= 0)) && uid != it->uid) {
+			colliding = true;
+			return it;
+		}
+	}
+	if(!colliding)
+		return nullptr;
 }

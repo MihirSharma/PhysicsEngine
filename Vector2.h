@@ -4,8 +4,8 @@
 
 	class Vector2 {
 	private:
-		long float x, y;
 	public:
+		long float x, y;
 		Vector2();
 		Vector2(long float a, long float b);
 		friend std::ostream& operator<<(std::ostream& out, Vector2 other);
