@@ -11,5 +11,13 @@ public:
 
 	static void AddForce2D(GameObject2D& go, Vector2& f);
 
+	static void SetVelocity3D(GameObject3D& go, Vector3 v);
+
+	static void AddForce3D(GameObject3D& go, Vector3& f);
+
+	
+
+
+
 };
 
