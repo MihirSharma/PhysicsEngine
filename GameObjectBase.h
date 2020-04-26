@@ -5,9 +5,10 @@
 
 class GameObjectBase
 {
-private:
-public:
+protected:
 	float radius;
+	std::vector<std::string> collisionException;
+public:
 	GameObjectBase(float radius) :
 		radius(radius) {};
 	GameObjectBase() :
@@ -15,7 +16,6 @@ public:
 
 	float GetRad();
 	void SetRad(float rad);
-	std::vector<std::string> collisionException;
 	void AddToCollisionException(std::string x);
 };
 

@@ -116,9 +116,8 @@ GameObject3D* GameObject3D::CollisionDetection3D() {
 	for (auto it : GameObject3D::ObjectList) {
 		bool exception = false;
 		for (auto it2 : collisionException) {
-			if (it2 == it->Tag) {
+			if (it2 == it->Tag) 
 				exception = true;
-			}
 		}
 		if (!((abs(it->Pos.x + it->radius) - abs(Pos.x - radius) <= 0 || abs(Pos.x + radius) - abs(it->Pos.x - it->radius) <= 0)) && !((abs(it->Pos.y + it->radius) - abs(Pos.y - radius) <= 0 || abs(Pos.y + radius) - abs(it->Pos.y - it->radius) <= 0)) && !((abs(it->Pos.z + it->radius) - abs(Pos.z - radius) <= 0 || abs(Pos.z + radius) - abs(it->Pos.z - it->radius) <= 0)) && (uid != it->uid && !exception)) {
 			colliding = true;

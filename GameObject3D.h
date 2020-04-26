@@ -4,6 +4,15 @@
 #include <vector>
 #include "GameObjectBase.h"
 
+///<summary>
+///Class for creating 3-D Game Objects
+///<para>.................................................................................................</para>
+///<para> Member Variables: </para>
+///<para>	string Name, Vector3 Position, float Mass, float Drag, string Tag, float Radius</para>
+///<para>.................................................................................................</para>
+///<para>Member Functions: </para>
+///<para>		void SetName(), void SetPos(), void SetMass(), void SetDrag(), void SetTag(), string GetName(), Vector3 GetPos(), float GetMass(), float GetDrag(), string GetTag(), GameObject3D* CollisionDetection3D()</para>
+///</summary>
 class GameObject3D: public GameObjectBase
 {
 private:

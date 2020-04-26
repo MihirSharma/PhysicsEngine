@@ -4,6 +4,15 @@
 #include <vector>
 #include "GameObjectBase.h"
 
+///<summary>
+///Class for creating 2-D Game Objects
+///<para>.................................................................................................</para>
+///<para> Member Variables: </para>
+///<para>	string Name, Vector2 Position, float Mass, float Drag, string Tag, float Radius</para>
+///<para>.................................................................................................</para>
+///<para>Member Functions: </para>
+///<para>		void SetName(), void SetPos(), void SetMass(), void SetDrag(), void SetTag(), string GetName(), Vector2 GetPos(), float GetMass(), float GetDrag(), string GetTag(), GameObject2D* CollisionDetection2D()</para>
+///</summary>
 class GameObject2D : public GameObjectBase
 {
 private:
